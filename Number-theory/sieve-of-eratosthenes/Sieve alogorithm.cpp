@@ -1,5 +1,4 @@
-< 
-                        /* Md. Abul Kalam Azad */
+                         /* Md. Abul Kalam Azad */
                          /* CSE-13  , @RUET */
                         /* Md. Abul Kalam Azad */
                          /* CSE-13  , @RUET */
@@ -78,5 +77,3 @@ int main()
     return 0;
 
 }
-
->
