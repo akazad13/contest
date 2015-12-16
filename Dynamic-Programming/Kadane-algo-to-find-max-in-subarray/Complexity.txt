@@ -1,0 +1,4 @@
+** Complexity O(n)
+
+if sum is positive then add with next value.. 
+if negative , rule out that value ,, and start from next index
