@@ -1,0 +1,3 @@
+*** it uses Kadane algorithm to find the maximum sum of subrectengular of a 2D array/Matrix
+*** it uses column*column*row for comutation
+***  complexity O(column*column*row)
