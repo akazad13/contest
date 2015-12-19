@@ -37,7 +37,7 @@ long long int MST_primes(int src,int max_node)
                 src = top.v;
                 p = top.w;
                 q.pop();
-            } while(visited[src]==true);
+            } while(visited[src]==true && !q.empty());
 
             Vartex.push_back(src);
 
