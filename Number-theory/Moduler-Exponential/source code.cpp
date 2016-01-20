@@ -1,16 +1,43 @@
+    /************************************************/
+            /************************************************/
+            /**                                            **/
+            /**                 *           *    *         **/
+            /**                * *          *   *          **/
+            /**               *   *         *  *           **/
+            /**              *     *        * *            **/
+            /**             *********       * *            **/
+            /**            *         *      *  *           **/
+            /**           *           *     *   *          **/
+            /**          *             *    *    *         **/
+            /**                                            **/
+            /**             Md. Abul Kalam Azad            **/
+            /**           CSE - 13 series , RUET,BD        **/
+            /**        Email : akazad.cse13@gmail.com      **/
+            /**                cell-01686871012            **/
+            /**           Cool Ur head & Think :-)         **/
+            /**        codeforce & uva id: akazad133032    **/
+            /**         fb id: facebook.com/akazad.cse13   **/
+            /**                                            **/
+            /**                                            **/
+            /**                                            **/
+            /************************************************/
+            /************************************************/
+
+
+
 #include<iostream>
 
 using namespace std;
-long int temp;
+long long int temp;
 
-long int BigMod(long int a,long int p,long int m)
+long int solve(long int a,long int p,long int m)
 {
     if(p==0)
         return 1;
     if(p%2==1)
-        return ((a%m)*(BigMod(a,p-1,m))%m);
+        return ((a%m)*(solve(a,p-1,m))%m);
     else
-         temp=BigMod(a,p/2,m)%m;
+         temp=solve(a,p/2,m)%m;
     return (temp*temp)%m;
 }
 
@@ -21,7 +48,7 @@ int main()
 
     while(cin>>a>>p>>m)
     {
-        cout<<BigMod(a,p,m)<<endl;
+        cout<<solve(a,p,m)<<endl;
     }
     return 0;
 }
