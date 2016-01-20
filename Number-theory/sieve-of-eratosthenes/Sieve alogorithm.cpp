@@ -1,9 +1,24 @@
-                         /* Md. Abul Kalam Azad */
-                         /* CSE-13  , @RUET */
-                        /* Md. Abul Kalam Azad */
-                         /* CSE-13  , @RUET */
-                         /* cell-01686871012*/
-                       /* Cool Ur head & Think */
+            /************************************************/
+            /************************************************/
+            /**                                            **/
+            /**                 *           *    *         **/
+            /**                * *          *   *          **/
+            /**               *   *         *  *           **/
+            /**              *     *        * *            **/
+            /**             *********       * *            **/
+            /**            *         *      *  *           **/
+            /**           *           *     *   *          **/
+            /**          *             *    *    *         **/
+            /**                                            **/
+            /**             Md. Abul Kalam Azad            **/
+            /**           CSE - 13 series , RUET,BD        **/
+            /**        Email : akazad.cse13@gmail.com      **/
+            /**                cell-01686871012            **/
+            /**           Cool Ur head & Think :-)         **/
+            /**                                            **/
+            /**                                            **/
+            /************************************************/
+            /************************************************/
 
 #include<iostream>
 #include<bits/stdc++.h>
@@ -23,11 +38,12 @@ using namespace std;
 
 #define MAX 10000010
 bool prime[MAX+10];
-vector<int>primeList;
+vector<int>primeList; //for saving prime number in a vector
 int Vsize;
 
 void sieve()
 {
+  //generating prime table
     for(int i=4;i<=MAX;i+=2)
         prime[i]=1;
     int srt = sqrt(MAX);
@@ -43,6 +59,8 @@ void sieve()
     }
     prime[0]=prime[1]=1;
 
+
+  //for saving the prime in one place
     for(int i=2;i<=MAX;i++)
     {
         if(prime[i]==0)
@@ -72,7 +90,9 @@ End of my note */
 
 int main()
 {
-    sieve();
+    sieve(); //calling sieve function
+    
+    //then you can write your code here
 
     return 0;
 
