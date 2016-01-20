@@ -38,11 +38,11 @@ int Vsize;
 
 bool Check(int n, int pos)
 {
-    return  n&(1<<pos);
+    return  n&(1<<pos); //cheaking if the pos position has 1 or not
 }
 int Set(int n, int pos)
 {
-    return n= n|(1<<pos);
+    return n= n|(1<<pos); //set 1 to the pos
 }
 
 
@@ -50,7 +50,7 @@ void sieve()
 {
     for(int i=4;i<=MAX;i+=2)
     {
-        prime[i>>5]= Set(prime[i>>5],i&31);
+        prime[i>>5]= Set(prime[i>>5],i&31); 
     }
     int srt = sqrt(MAX);
     for(int i=3;i<=srt; i+=2)
