@@ -15,10 +15,14 @@
             /**        Email : akazad.cse13@gmail.com      **/
             /**                cell-01686871012            **/
             /**           Cool Ur head & Think :-)         **/
+            /**        codeforce & uva id: akazad133032    **/
+            /**         fb id: facebook.com/akazad.cse13   **/
+            /**                                            **/
             /**                                            **/
             /**                                            **/
             /************************************************/
             /************************************************/
+
 
 #include<iostream>
 #include<bits/stdc++.h>
