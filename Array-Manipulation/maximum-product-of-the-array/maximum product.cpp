@@ -1,3 +1,9 @@
+#include<iostream>
+#include<bits/stdc++.h>
+
+using namespace std;
+#define lld long long int
+
 int main()
 {
     int n;
