@@ -1,0 +1,33 @@
+#include<iostream>
+#include<bits/stdc++.h>
+
+using namespace std;
+
+#define lld long long int
+
+lld TC[100];
+
+int main()
+{
+    memset(TC,0,sizeof(TC));
+    int n;
+    cin>>n;
+
+    TC[0]=1;
+    TC[1]=1;
+
+    for(int i=2;i<=n;i++)
+    {
+        for(int j=0;j<i;j++)
+        {
+            TC[i]+=TC[j]*TC[i-j-1];
+            //cout<<TC[i]<<endl;
+        }
+    }
+
+    cout<<TC[n]<<endl;
+
+
+
+    return 0;
+}
