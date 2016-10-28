@@ -1,133 +1,34 @@
-            /************************************************/
-            /************************************************/
-            /**                                            **/
-            /**                 *           *    *         **/
-            /**                * *          *   *          **/
-            /**               *   *         *  *           **/
-            /**              *     *        * *            **/
-            /**             *********       * *            **/
-            /**            *         *      *  *           **/
-            /**           *           *     *   *          **/
-            /**          *             *    *    *         **/
-            /**                                            **/
-            /**             Md. Abul Kalam Azad            **/
-            /**           CSE - 13 series , RUET,BD        **/
-            /**        Email : akazad.cse13@gmail.com      **/
-            /**                cell-01686871012            **/
-            /**           Cool Ur head & Think :-)         **/
-            /**        codeforce & uva id: akazad133032    **/
-            /**         fb id: facebook.com/akazad.cse13   **/
-            /**                                            **/
-            /**                                            **/
-            /**                                            **/
-            /************************************************/
-            /************************************************/
+// PList is the prime List
+// prime is the sieve
 
-#include<iostream>
-#include<bits/stdc++.h>
-
-using namespace std;
-//Macros
-#define read(a) scanf("%d",&a)
-#define CLEAR(a,b) memset(a,b,sizeof(a))
-#define VI(a) vector<a>
-
-#define lld long long int
-#define ulld unsigned long long int
-#define PI acos(-1.0)
-#define Gamma 0.5772156649015328606065120900824024310421
-
-//End Macros
-
-#define MAX 10000010
-bool prime[MAX+10];
-vector<int>primeList;
-int Vsize;
-
-void sieve()
+int PI_f(int m)
 {
-    for(int i=4;i<=MAX;i+=2)
-        prime[i]=1;
-    int srt = sqrt(MAX);
-    for(int i=3;i<=srt;i+=2)
+    if(prime[m]==0)
     {
-        if(prime[i]==0)
+        return m-1;
+    }
+    ll res=1;
+
+    for(int i=0;i<Vsize && pList[i]*pList[i]<=m;i++)
+    {
+        if(m<=1)
+            break;
+        if(m%pList[i]==0)
         {
-            for(int j=i*i;j<=MAX;j+=2*i)
+            int cnt=0;
+            while(m%pList[i]==0)
             {
-                prime[j]=1;
+                m/=pList[i];
+                cnt++;
             }
+            res = res*(pList[i]-1)*round(pow(pList[i],cnt-1)); // PI(n) = (p1^(a1-1))*(p1-1)*(p2^(a2-1))*(p2-1)*...
         }
-    }
-    prime[0]=prime[1]=1;
-
-    for(int i=2;i<=MAX;i++)
-    {
-        if(prime[i]==0)
+        if(prime[m]==0 && m>1)
         {
-            primeList.push_back(i);
-        }
-    }
-
-    Vsize = primeList.size();
-
-    //cout<<"seive OK"<<endl;
-}
-
-int PI_function(int n)
-{
-    if(prime[n]==0)
-    {
-        //cout<<n-1;
-        return n-1;
-    }
-    int count;
-    int res=1;
-    for(int i=0;i<=Vsize;i++)
-    {
-        count=0;
-        while(n%primeList[i]==0 && n!=1)
-        {
-            n/=primeList[i];
-            count++;
-        }
-        if(count>=1)
-            res*=((pow(primeList[i],count))-(pow(primeList[i],count-1)));
-
-        if(n<=1)
-            break;
-
-        if(prime[n]==0)
-        {
-            res*=(n-1);
+            res = res*(m-1);
             break;
         }
     }
-   // cout<<res;
 
     return res;
-
 }
-
-
-/* My note:-
-    1. Can i solve the sub-problem of that problem
-    2. Can i solve the whole problem
-    3. Do i check the parameter
-    4. Did i clear all the memory
-    5. check whether DP is cleared
-    6. Understand the prob?! check again!!!
-
-End of my note */
-
-
-
-int main()
-{
-    sieve();
-    int res = PI_function(1000);
-    cout<<res<<endl;
-    return 0;
-
-}
-
