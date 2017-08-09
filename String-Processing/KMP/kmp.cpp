@@ -8,12 +8,10 @@ using namespace std;
 
 int pattern[1200100];
 char text[1200100];
-char str[1200000];
 char sub[12000020];
 
-void fun(char *sub)
+void fun(int m)
 {
-    const int m = strlen(sub);
     int i = 0, j = -1;
 
     pattern[i] = -1;
@@ -31,13 +29,13 @@ void fun(char *sub)
       //  cout<<pattern[i]<<" ";
 }
 
-int cal(char *text, char *sub)
+int cal()
 {
     int i=0, j=0, count = 0;
     int n = strlen(text);
     int m = strlen(sub);
 
-    fun(sub);
+    fun(m);
     while (i<n)
     {
         while (j>=0 && text[i]!=sub[j])
@@ -64,23 +62,10 @@ int main()
 
     for(int Case = 1; Case <=test; Case++)
     {
-        gets(str);
+        gets(text);
         gets(sub);
-        cnt=0;
-        len = strlen(str);
-
-        for(int i=0;i<len;i++)
-        {
-
-            if(str[i]!=' ')
-            {
-                text[cnt]=str[i];
-                cnt++;
-            }
-        }
-        text[cnt]='\0';
-
-        printf("Case %d: %d\n", Case,cal(text, sub) );
+        
+        printf("Case %d: %d\n", Case,cal() );
     }
 
     return 0;
