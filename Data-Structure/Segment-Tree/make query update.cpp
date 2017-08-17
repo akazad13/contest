@@ -17,12 +17,15 @@ void make_tree(int node, int start, int eend)
        // cout<<tree[node]<<" "<<node<<endl;
         return ;
     }
-    int mid = (start+eend)/2;
+    int mid = (start+eend)>>1;
+    
+    int l = node<<1;
+    int r = l+1;
 
-    make_tree(2*node,start,mid);
-    make_tree(2*node+1,mid+1,eend);
+    make_tree(l,start,mid);
+    make_tree(r,mid+1,eend);
 
-    tree[node]=max(tree[2*node],tree[2*node+1]);
+    tree[node]=max(tree[l],tree[r]);
 
 }
 
@@ -35,10 +38,13 @@ int query(int node, int start, int eend, int st, int ed)
         ans=max(ans,tree[node]);
         return ans;
     }
-    int mid = (start+eend)/2;
+    int mid = (start+eend)>>1;
+    
+    int l = node<<1;
+    int r = l+1;
 
-    query(2*node,start,mid,st,ed);
-    query(2*node+1,mid+1,eend,st,ed);
+    query(l,start,mid,st,ed);
+    query(r,mid+1,eend,st,ed);
 
 
 }
@@ -53,10 +59,14 @@ void update(int node,int start,int eend, int index,int x) //TO update
         return ;
     }
 
-    int mid = (start+eend)/2;
-    update(2*node,start,mid,index,x);
-    update(2*node+1,mid+1,eend,index,x);
-    tree[node]=max(tree[node*2],tree[node*2+1]);
+    int mid = (start+eend)>>1;
+    
+    int l = node<<1;
+    int r = l+1;
+    
+    update(l,start,mid,index,x);
+    update(r,mid+1,eend,index,x);
+    tree[node]=max(tree[l],tree[r]);
 
 }
 
