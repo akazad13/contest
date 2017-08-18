@@ -4,17 +4,18 @@
 using namespace std;
 
 #define mx 100010
+#define ll long long int
 
 struct Node
 {
-    long long int prop;
-    long long int sum;
+    ll prop;
+    ll sum;
 };
 
 Node tree[3*mx+10];
-long long int arr[mx+10];
+ll arr[mx+10];
 
-void make_tree(int node, int start, int eend)
+void build(int node, int start, int eend)
 {
     if(start==eend)
     {
@@ -23,16 +24,18 @@ void make_tree(int node, int start, int eend)
        // cout<<tree[node]<<" "<<node<<endl;
         return ;
     }
-    int mid = (start+eend)/2;
+    int mid = (start+eend)>>1;
+    int l = node<<1;
+    int r = l+1;
 
-    make_tree(2*node,start,mid);
-    make_tree(2*node+1,mid+1,eend);
+    build(l,start,mid);
+    build(r,mid+1,eend);
 
-    tree[node].sum=tree[2*node].sum+tree[2*node+1].sum;
-
+    tree[node].sum=tree[l].sum+tree[r].sum;
+    return;
 }
 
-long long int query(int node, int start, int eend, int st, int ed, long long int car)
+ll query(int node, int start, int eend, int st, int ed, long long int car)
 {
     if(eend<st || start>ed)
         return 0;
@@ -40,10 +43,12 @@ long long int query(int node, int start, int eend, int st, int ed, long long int
     {
         return tree[node].sum+(eend-start+1)*car;
     }
-    int mid = (start+eend)/2;
+    int mid = (start+eend)>>1;
+    int l = node<<1;
+    int r = l+1;
 
-    long long int p1 = query(2*node,start,mid,st,ed,car+tree[node].prop);
-    long long int p2 = query(2*node+1,mid+1,eend,st,ed,car+tree[node].prop);
+    ll p1 = query(l,start,mid,st,ed,car+tree[node].prop);
+    ll p2 = query(r,mid+1,eend,st,ed,car+tree[node].prop);
 
     return p1+p2;
 
@@ -51,7 +56,7 @@ long long int query(int node, int start, int eend, int st, int ed, long long int
 
 int m;
 
-void update(int node,int start,int eend, int st,int en,long long int x)
+void update(int node,int start,int eend, int st,int en,ll x)
 {
     if(eend<st || start>en)
         return ;
@@ -64,10 +69,13 @@ void update(int node,int start,int eend, int st,int en,long long int x)
         return ;
     }
 
-    int mid = (start+eend)/2;
-    update(2*node,start,mid,st,en,x);
-    update(2*node+1,mid+1,eend,st,en,x);
-    tree[node].sum=tree[node*2].sum+tree[node*2+1].sum +tree[node].prop*(eend-start+1);
+    int mid = (start+eend)>>1;
+    int l = node<<1;
+    int r = l+1;
+    
+    update(l,start,mid,st,en,x);
+    update(r,mid+1,eend,st,en,x);
+    tree[node].sum=tree[l].sum+tree[r].sum +tree[node].prop*(eend-start+1);
 
 }
 
