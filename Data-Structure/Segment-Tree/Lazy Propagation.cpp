@@ -83,7 +83,7 @@ int main()
 {
     //freopen("in.txt","r",stdin);
     int test,n,qur,st,en,p;
-    long long int x;
+    ll x;
 
     cin>>test;
 
