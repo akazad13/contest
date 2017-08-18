@@ -97,7 +97,7 @@ int main()
         for(int i=0;i<mx;i++)
             arr[i]=0;
         scanf("%d %d",&n,&qur);
-         make_tree(1,1,n);
+        build(1,1,n);
 
         printf("Case %d:\n",Case);
         for(int i=0;i<qur;i++)
