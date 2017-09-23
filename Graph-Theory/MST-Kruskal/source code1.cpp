@@ -18,7 +18,9 @@ int par[Max];
 vector<edge>e;
 int find(int r)
 {
-   return (par[r]==r) ? r:  find(par[r]);
+   return (par[r]==r) 
+	   return r;
+     return par[r]=find(par[r]);
 }
 long long int mst(int n)
 {
