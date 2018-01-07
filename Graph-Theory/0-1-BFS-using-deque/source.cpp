@@ -90,8 +90,6 @@ int main()
         {
            scanf("%s",&g[i]);
         }
-
-
         zero_one_bfs();
         printf("Case %d: %lld\n",Case,cost[n-1][m-1]);
     }
