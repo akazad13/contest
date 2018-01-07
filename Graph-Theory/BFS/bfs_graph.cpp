@@ -7,13 +7,15 @@ using namespace std;
 #define Clear(a,b) memset(a,b,sizeof a)
 #define si(a) scanf("%d",&a)
 #define sl(a) scanf("%lld",&a)
+#define ll long long int
 
 vector<int> g[Max];
 int parent[Max];
 
 void bfs(int src, int n)
 {
-    int vis[Max],level[Max]; // level = distance from source
+    bool vis[Max];
+    int level[Max]; // level = distance from source
     Clear(vis,0);
     queue<int>Q;
 	Q.push(src);
@@ -39,15 +41,25 @@ void bfs(int src, int n)
 }
 int main()
 {
-    int n,e,u,v; // n=node, e=edge
-    si(n); si(e);
+    int test,n,e,u,v; // n=node, e=edge
 
-    for(int i=1;i<=e;i++)
+    si(test);
+
+    for(int Case=1;Case<=test;Case++)
     {
-        si(u); si(v);
-        g[u].push_back(v);
-        g[v].push_back(u); // for bidirectional
+        si(n); si(e);
+
+
+        for(int i=0;i<=n;i++)
+            g[i].clear();
+
+        for(int i=1;i<=e;i++)
+        {
+            si(u); si(v);
+            g[u].push_back(v);
+            g[v].push_back(u); // for bidirectional
+        }
+        bfs(1,n);
     }
-    bfs(1,n);
     return 0;
 }
