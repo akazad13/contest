@@ -47,7 +47,7 @@ ll PI_f(int m)
     {
         return m-1;
     }
-    ll res=1;
+    ll res=m;
 
     for(int i=0; i<Vsize && primeList[i]*primeList[i]<=m; i++)
     {
