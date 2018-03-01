@@ -1,3 +1,10 @@
+template<typename T>inline T POW(T B,T P)
+{
+    if(P==0) return 1;
+    if(P&1) return B*POW(B,P-1);
+    else return SQR(POW(B,P/2));
+}
+
 // PList is the prime List
 // prime is the sieve
 
