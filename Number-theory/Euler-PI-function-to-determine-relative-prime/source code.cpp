@@ -3,12 +3,6 @@ bool prime[MAX+10];
 vector<int>primeList; //for saving prime number in a vector
 int Vsize;
 
-template<typename T>inline T POW(T B,T P)
-{
-    if(P==0) return 1;
-    if(P&1) return B*POW(B,P-1);
-    else return SQR(POW(B,P/2));
-}
 
 void seive()
 {
@@ -67,11 +61,11 @@ ll PI_f(int m)
                 m/=primeList[i];
                 cnt++;
             }
-            res = res*(primeList[i]-1)*round(pow(primeList[i],cnt-1)); // PI(n) = (p1^(a1-1))*(p1-1)*(p2^(a2-1))*(p2-1)*...
+             res = res - (res/cur);
         }
         if(prime[m]==0 && m>1)
         {
-            res = res*(m-1);
+             res = res - (res/m);
             break;
         }
     }
