@@ -2,23 +2,8 @@
 #include<bits/stdc++.h>
 
 using namespace std;
+#define ll long long int
 
-#define rep(i,p,n) for( i = p; i<n;i++)
-#define lld long long int
-//#define read(a) scanf("%d",&a)
-#define Lread(a) scanf("%lld",&a)
-#define Uread(a) scanf("%llu",&a)
-#define Dread(a) scanf("%lf",&a)
-#define write(a) printf("%d\n",a)
-#define Case(a) printf("Case %d: ",a)
-
-#define pb push_back
-#define VI vector<int>
-#define VL vector<long long int>
-#define VD vector<double>
-
-#define pi pair<int,int>
-#define mp(a,b) make_pair(a,b)
 
 #define Clear(a,b) memset(a,b,sizeof(a))
 
@@ -40,106 +25,97 @@ template<class T>inline bool read(T &x) {
 
 struct Node{
 
-    lld suffixSum,prefixSum,sum,maxSum;
+    ll sufSum,preSum,sum,maxSum;
 };
 
-lld arr[Max+10];
+ll arr[Max+10];
 Node tree[4*Max+10];
 
-void tree_build(int node, int st, int eend)
+void tree_build(int node, int s, int e)
 {
-    //cout<<st<<" "<<eend<<endl;
-    if(st==eend)
+    if(s==e)
     {
-        //cout<<arr[st]<<endl;
-        tree[node].suffixSum=arr[st];
-        tree[node].prefixSum=arr[st];
-        tree[node].sum=arr[st];
-        tree[node].maxSum=arr[st];
-
-
+        tree[node].sufSum=arr[s];
+        tree[node].preSum=arr[s];
+        tree[node].sum=arr[s];
+        tree[node].maxSum=arr[s];
         return ;
     }
+    int mid = (s+e)>>1;
+    int l = node<<1;
+    int r = l+1;
 
-    int mid = (st+eend)>>1;
+    tree_build(l,s,mid);
+    tree_build((l)+1,mid+1,e);
 
-    tree_build(node<<1,st,mid);
-    tree_build((node<<1)+1,mid+1,eend);
+    tree[node].preSum = max(tree[l].preSum,tree[l].sum+tree[r].preSum);
+    tree[node].sufSum = max(tree[r].sufSum,tree[r].sum+tree[l].sufSum);
+    tree[node].sum = tree[l].sum+tree[r].sum;
 
-    tree[node].prefixSum = max(tree[node<<1].prefixSum,tree[node<<1].sum+tree[(node<<1)+1].prefixSum);
-    tree[node].suffixSum = max(tree[(node<<1)+1].suffixSum,tree[(node<<1)+1].sum+tree[node<<1].suffixSum);
-    tree[node].sum = tree[node<<1].sum+tree[(node<<1)+1].sum;
-
-    tree[node].maxSum = max(tree[node].prefixSum,max(tree[node].suffixSum,max(tree[node<<1].maxSum,max(tree[(node<<1)+1].maxSum,tree[node<<1].suffixSum+tree[(node<<1)+1].prefixSum))));
-
-
+    tree[node].maxSum = max(tree[node].preSum,max(tree[node].sufSum,max(tree[l].maxSum,max(tree[r].maxSum,tree[l].sufSum+tree[r].preSum))));
     return ;
 }
 
-void update(int node, int start, int eend, int ind)
+void update(int node, int s, int e, int ind)
 {
-    if(start>ind || eend<ind)
+    if(s>ind || e<ind)
         return ;
-    if(start==ind && eend==ind)
+    if(s==ind && e==ind)
     {
-        //cout<<arr[st]<<endl;
-        tree[node].suffixSum=arr[ind];
-        tree[node].prefixSum=arr[ind];
+        tree[node].sufSum=arr[ind];
+        tree[node].preSum=arr[ind];
         tree[node].sum=arr[ind];
         tree[node].maxSum=arr[ind];
         return ;
     }
 
-    int mid = (start+eend)>>1;
+    int mid = (s+e)>>1;
+    int l = node<<1;
+    int r = l+1;
 
-    update(node<<1,start,mid,ind);
-    update((node<<1)+1,mid+1,eend,ind);
+    update(l,s,mid,ind);
+    update(r,mid+1,e,ind);
 
-    tree[node].prefixSum = max(tree[node<<1].prefixSum,tree[node<<1].sum+tree[(node<<1)+1].prefixSum);
-    tree[node].suffixSum = max(tree[(node<<1)+1].suffixSum,tree[(node<<1)+1].sum+tree[node<<1].suffixSum);
-    tree[node].sum = tree[node<<1].sum+tree[(node<<1)+1].sum;
+    tree[node].preSum = max(tree[l].preSum,tree[l].sum+tree[r].preSum);
+    tree[node].sufSum = max(tree[r].sufSum,tree[r].sum+tree[l].sufSum);
+    tree[node].sum = tree[l].sum+tree[r].sum;
 
-    tree[node].maxSum = max(tree[node].prefixSum,max(tree[node].suffixSum,max(tree[node<<1].maxSum,max(tree[(node<<1)+1].maxSum,tree[node<<1].suffixSum+tree[(node<<1)+1].prefixSum))));
-
-
+    tree[node].maxSum = max(tree[node].preSum,max(tree[node].sufSum,max(tree[l].maxSum,max(tree[r].maxSum,tree[l].sufSum+tree[r].preSum))));
     return ;
 }
 
 
-Node tree_query(int node , int start, int eend, int L, int R)
+Node tree_query(int node , int s, int e, int L, int R)
 {
-    //cout<<ans.a<<endl;
-
     Node result;
-    result.sum = result.prefixSum = inf;
-    result.maxSum = result.suffixSum= inf;
-   // cout<<result.maxSum<<endl;
-    if(eend<L || start>R)
-        return result;
-    if(start>=L && eend<=R)
-    {
-     // cout<<tree[node].maxSum<<endl;
-        return tree[node];
+    result.sum = result.preSum = inf;
+    result.maxSum = result.sufSum= inf;
 
+    if(e<L || s>R)
+        return result;
+    if(s>=L && e<=R)
+    {
+        return tree[node];
     }
 
-    int mid = (start+eend)>>1;
+    int mid = (s+e)>>1;
+    int l = node<<1;
+    int r = l+1;
 
-    Node t1 = tree_query(node<<1,start,mid,L,R);
-    Node t2 = tree_query((node<<1)+1,mid+1,eend,L,R);
-
-    //cout<<t1.maxSum<<" "<<t2.maxSum<<endl;
+    Node t1 = tree_query(l,s,mid,L,R);
+    Node t2 = tree_query(r,mid+1,e,L,R);
 
     result.sum = t1.sum+t2.sum;
-    result.prefixSum = max(t1.prefixSum,t1.sum+t2.prefixSum);
-    result.suffixSum = max(t2.suffixSum,t2.sum+t1.suffixSum);
+    result.preSum = max(t1.preSum,t1.sum+t2.preSum);
+    result.sufSum = max(t2.sufSum,t2.sum+t1.sufSum);
 
-    result.maxSum = max(result.prefixSum,max(result.suffixSum,max(t1.maxSum,max(t2.maxSum,t1.suffixSum+t2.prefixSum))));
+    result.maxSum = max(result.preSum,max(result.sufSum,max(t1.maxSum,max(t2.maxSum,t1.sufSum+t2.preSum))));
 
     return result;
 }
 
-lld val[100010];
+
+ll val[100010];
 
 int main()
 {
@@ -185,13 +161,13 @@ int main()
 
             for(int i=0;i<4*n;i++)
             {
-                tree[i].prefixSum=tree[i].suffixSum=tree[i].sum=tree[i].maxSum=0;
+                tree[i].preSum=tree[i].sufSum=tree[i].sum=tree[i].maxSum=0;
             }
 
              tree_build(1,1,n-1);
 
              int id,l,r,ind;
-             lld x;
+             ll x;
 
              printf("Case %d:\n",Case);
 
@@ -237,7 +213,3 @@ int main()
         }
     return 0;
 }
-
-
-
-
