@@ -1,36 +1,46 @@
-#include<iostream>
-#include<bits/stdc++.h>
+// C++ program to find maximum product subarray
 
-using namespace std;
-#define lld long long int
-
-int main()
+ll max_product()
 {
-    int n;
-    lld arr[100010];
-    scanf("%d",&n);
+	ll max_fwd = INT_MIN, max_bkd = INT_MIN;
 
-    for(int i=0;i<n;i++)
-    {
-        scanf("%lld",&arr[i]);
-    }
+	// Initialize current product
+	ll max_till_now = 1;
 
-    lld cur_max_product = arr[0];
-    lld pre_min_product = arr[0];
-    lld pre_max_product = arr[0];
-    lld cur_min_product = arr[0];
-    lld ans = arr[0];
+	for (int i=0; i<n; i++)
+	{
+		// if arr[i]==0, it is breaking condition
+		// for contiguos subarray
+		max_till_now = max_till_now*arr[i];
+		if (max_till_now == 0)
+		{
+			max_till_now = 1;
+			continue;
+		}
+		if (max_fwd < max_till_now)
+			max_fwd = max_till_now;
+	}
 
-    for(int i=1;i<n;i++)
-    {
-        cur_max_product = max(pre_max_product*arr[i],max(pre_min_product,arr[i]));
-        cur_min_product = min(pre_max_product*arr[i],min(pre_min_product,arr[i]));
-        ans = max(ans,cur_max_product);
-        pre_max_product = cur_max_product;
-        pre_min_product = cur_min_product;
-    }
+	max_till_now = 1;
 
-    cout<<ans<<endl;
+	// iterating within backward direction in array
+	for (int i=n-1; i>=0; i--)
+	{
+		max_till_now = max_till_now * arr[i];
+		if (max_till_now == 0)
+		{
+			max_till_now = 1;
+			continue;
+		}
 
-    return 0;
+		// update max_bkd
+		if (max_bkd < max_till_now)
+			max_bkd = max_till_now;
+	}
+
+	// return max of max_fwd and max_bkd
+	ll res = max(max_fwd, max_bkd);
+	return max(res, 0);
 }
+
+
