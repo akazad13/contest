@@ -1,3 +1,5 @@
+// all number must be less than max
+
 #include<iostream>
 #include<bits/stdc++.h>
 
