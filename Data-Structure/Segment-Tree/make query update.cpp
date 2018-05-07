@@ -3,91 +3,83 @@
 
 using namespace std;
 
-#define mx 50000
+#define mx 100010
+#define ll long long int
 
-int tree[3*mx];
-int arr[mx+10];
-int ans;
+ll tree[3*mx];
+ll arr[mx+10];
 
-void make_tree(int node, int start, int eend)
+void build(int node, int s, int e)
 {
-    if(start==eend)
+    if(s==e)
     {
-        tree[node]=arr[start];
-       // cout<<tree[node]<<" "<<node<<endl;
+        tree[node]=arr[s];
         return ;
     }
-    int mid = (start+eend)>>1;
-    
+    int mid = (s+e)>>1;
+
     int l = node<<1;
     int r = l+1;
 
-    make_tree(l,start,mid);
-    make_tree(r,mid+1,eend);
+    build(l,s,mid);
+    build(r,mid+1,e);
 
     tree[node]=max(tree[l],tree[r]);
-
 }
 
-int query(int node, int start, int eend, int st, int ed)
+ll query(int node, int s, int e, int st, int ed)
 {
-    if(eend<st || start>ed)
-        return max(ans,-1*INT_MAX);
-    if(start>=st && eend<=ed)
+    if(e<st || s>ed)
+        return (-1*INT_MAX);
+    if(s>=st && e<=ed)
     {
-        ans=max(ans,tree[node]);
-        return ans;
+        return tree[node];
     }
-    int mid = (start+eend)>>1;
-    
+    int mid = (s+e)>>1;
+
     int l = node<<1;
     int r = l+1;
 
-    query(l,start,mid,st,ed);
-    query(r,mid+1,eend,st,ed);
-
-
+    return max(query(l,s,mid,st,ed),query(r,mid+1,e,st,ed));
 }
 
-void update(int node,int start,int eend, int index,int x) //TO update
+void update(int node,int s,int e, int ind,ll x)
 {
-    if(eend<index || start>index)
+    if(e<ind || s>ind)
         return ;
-    if(start>=index && eend<=index)
+    if(s>=ind && e<=ind)
     {
         tree[node]=x;
         return ;
     }
 
-    int mid = (start+eend)>>1;
-    
+    int mid = (s+e)>>1;
+
     int l = node<<1;
     int r = l+1;
-    
-    update(l,start,mid,index,x);
-    update(r,mid+1,eend,index,x);
-    tree[node]=max(tree[l],tree[r]);
 
+    update(l,s,mid,ind,x);
+    update(r,mid+1,e,ind,x);
+    tree[node]=max(tree[l],tree[r]);
 }
 
 int main()
 {
-    //freopen("in.txt","r",stdin);
-    int test,n,qur,st,ed;
+    int n,qur,st,ed;
     scanf("%d",&n);
+
 
     for(int i=1;i<=n;i++)
     {
-        scanf("%d",&arr[i]);
+        scanf("%lld",&arr[i]);
     }
-    make_tree(1,1,n);
+    build(1,1,n);
     scanf("%d",&qur);
 
     for(int i=0;i<qur;i++) //to find max
     {
-        ans=-1*INT_MAX;
         scanf("%d %d",&st,&ed);
-        printf("%d\n",query(1,1,n,st,ed));
+        printf("%lld\n",query(1,1,n,st,ed));
 
     }
     return 0;
