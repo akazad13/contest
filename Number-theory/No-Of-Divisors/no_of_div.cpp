@@ -74,7 +74,7 @@ lld No_of_div(lld n)
     }
     lld count;
     lld res=1;
-    for(int i=0;i<=Vsize && n>1 && primeList[i]<=sqrt(n);i++)
+    for(int i=0;i<=Vsize && n>1 && primeList[i]*primeList[i]<=n;i++)
     {
         if(n<MAX)
         {
