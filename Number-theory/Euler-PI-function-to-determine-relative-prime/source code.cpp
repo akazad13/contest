@@ -1,4 +1,5 @@
 #define MAX 10000010
+#define ll long long
 bool prime[MAX+10];
 vector<int>primeList; //for saving prime number in a vector
 int Vsize;
@@ -53,13 +54,12 @@ ll PI_f(int m)
     {
         if(m<=1)
             break;
+        ll cur = primeList[i];
         if(m%primeList[i]==0)
         {
-            ll cnt=0;
             while(m%primeList[i]==0)
             {
                 m/=primeList[i];
-                cnt++;
             }
              res = res - (res/cur);
         }
