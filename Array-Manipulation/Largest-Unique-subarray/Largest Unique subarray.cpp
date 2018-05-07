@@ -8,23 +8,19 @@ using namespace std;
 
 int main()
 {
-    int n;
-    int test;
-    cin>>test;
+    int n,test;
+    scanf("%d",&test);
 
     while(test--)
     {
-        cin>>n;
+        scanf("%d",&n);
         for(int i=1;i<=n;i++)
         {
             cin>>arr[i];
         }
-      //  cout<<"end of input"<<endl;
-        map<int , int >myMap;
+        map<int,int>myMap;
 
-        int large=0;
-        int count=0;
-
+        int large=0,count=0;
         int j=1;
 
         for(int i=1;i<=n;i++)
@@ -63,7 +59,6 @@ int main()
                 large=1;
             else if(count>large)
                 large=count;
-
         }
 
         cout<<large<<endl;
