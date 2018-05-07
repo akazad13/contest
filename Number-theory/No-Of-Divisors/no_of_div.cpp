@@ -28,7 +28,7 @@
 
 using namespace std;
 
-#define lld long long int
+#define ll long long int
 
 #define MAX 10000110
 bool prime[MAX+10];
@@ -65,15 +65,15 @@ void sieve()
     //cout<<"seive OK"<<endl;
 }
 
-lld No_of_div(lld n)
+ll No_of_div(ll n)
 {
     if(n<MAX && prime[n]==0)
     {
         //cout<<n-1;
         return 2;
     }
-    lld count;
-    lld res=1;
+    ll count;
+    ll res=1;
     for(int i=0;i<=Vsize && n>1 && primeList[i]*primeList[i]<=n;i++)
     {
         if(n<MAX)
@@ -106,7 +106,7 @@ int main()
 {
     sieve();
 
-    lld a;
+    ll a;
     int test;
 
     scanf("%d",&test);
