@@ -28,11 +28,11 @@
 
 using namespace std;
 
-#define uud unsigned int
+#define unit unsigned int
 
 #define MAX 100000000
-uud prime[(MAX/32)+10]={0};
-uud primeList[5761456];
+unit prime[(MAX/32)+10]={0};
+unit primeList[5761456];
 int Vsize;
 
 
@@ -50,7 +50,7 @@ void sieve()
 {
     for(int i=4;i<=MAX;i+=2)
     {
-        prime[i>>5]= Set(prime[i>>5],i&31); 
+        prime[i>>5]= Set(prime[i>>5],i&31);
     }
     int srt = sqrt(MAX);
     for(int i=3;i<=srt; i+=2)
