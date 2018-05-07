@@ -29,18 +29,19 @@
 #include<bits/stdc++.h>
 
 using namespace std;
+#define ll long long int
 
-int x, y, d;
-int extendedEulid(int a, int b)
+ll x, y, d;
+ll extendedEulid(ll a, ll b)
 {
     if(b==0)
     {
         x=1; y=0; d=a; // some extensions
         return a;
     }
-    int ret = extendedEulid(b, a%b);     // GCD function
-    int x1 = y;
-    int y1 = x - (a/b) *y;
+    ll ret = extendedEulid(b, a%b);     // GCD function
+    ll x1 = y;
+    ll y1 = x - (a/b) *y;
     x = x1;
     y = y1;
     return ret;
@@ -48,11 +49,11 @@ int extendedEulid(int a, int b)
 
 int main()
 {
-    int a, b;
+    ll a, b;
     while(cin>>a>>b)
     {
         extendedEulid(a, b);
-        printf("x = %d, y = %d, gcd()=%d\n", x, y, d);
+        printf("x = %lld, y = %lld, gcd()=%lld\n", x, y, d);
     }
     return 0;
 }
