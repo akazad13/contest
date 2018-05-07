@@ -1,14 +1,9 @@
-
-long long int get_pow(long long int n,int p)
+ll get_pow(ll n,ll p)
 {
-    long long int res=0;
-    //cout<<p<<endl;
-    long long int pow;
-    for(pow=p;pow<=n;pow*=p)
+    ll res=0;
+    for(ll pow=p;pow<=n;pow*=p)
         {
             res=res+(n/pow);
-           // cout<<res<<" "<<pow<<endl;
         }
-    //cout<<"Res: "<<res<<endl;
     return res;
 }
