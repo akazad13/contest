@@ -19,7 +19,7 @@ vector<Edge> g[maxnodes];
 // Adds bidirectional edge
 void addEdge(int s, int t, int cap){
   Edge a = {t, g[t].size(), 0, cap};
-  Edge b = {s, g[s].size(), 0, cap};
+  Edge b = {s, g[s].size(), 0, cap}; // cap=0 for directed
   g[s].push_back(a);
   g[t].push_back(b);
 }
