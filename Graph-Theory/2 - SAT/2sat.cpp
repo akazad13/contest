@@ -5,6 +5,7 @@
 #define lim 8010
 #define Clear(a,b) memset(a,b,sizeof(a))
 
+// A V B  --> (A'->B) and (B'->A) 
 
 using namespace std;
 //0 based
