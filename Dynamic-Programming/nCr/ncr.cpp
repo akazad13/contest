@@ -1,3 +1,5 @@
+n,m<10^6 and mod < 10^12
+
 #include<bits/stdc++.h>
 
 using namespace std;
